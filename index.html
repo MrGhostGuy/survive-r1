@@ -160,16 +160,16 @@ var W=240,H=282,TILE=8,WORLD_W=256,WORLD_H=64,SEA=24;
 var BLK={AIR:0,DIRT:1,GRASS:2,STONE:3,SAND:4,WOOD:5,LEAVES:6,COAL_ORE:7,IRON_ORE:8,GOLD_ORE:9,DIAMOND_ORE:10,PLANKS:11,COBBLE:12,BEDROCK:13,WATER:14,SNOW:15,ICE:16,GLASS:17,TORCH:18,FURNACE:19,CHEST:20,CRAFT_TABLE:21,DOOR:22,LADDER:23,FARMLAND:24,WHEAT1:25,WHEAT2:26,WHEAT3:27,BED:28,CACTUS:29,CLAY:30,GRAVEL:31,OBSIDIAN:32,WALL_WOOD:33,WALL_STONE:34,ROOF_WOOD:35,FLOOR_WOOD:36,CAMPFIRE:37,ANVIL:38,WORKBENCH:39};
 var BNAMES=[];BNAMES[1]='Dirt';BNAMES[2]='Grass';BNAMES[3]='Stone';BNAMES[4]='Sand';BNAMES[5]='Wood';BNAMES[6]='Leaves';BNAMES[7]='Coal Ore';BNAMES[8]='Iron Ore';BNAMES[9]='Gold Ore';BNAMES[10]='Diamond Ore';BNAMES[11]='Planks';BNAMES[12]='Cobble';BNAMES[13]='Bedrock';BNAMES[14]='Water';BNAMES[15]='Snow';BNAMES[16]='Ice';BNAMES[17]='Glass';BNAMES[18]='Torch';BNAMES[19]='Furnace';BNAMES[20]='Chest';BNAMES[21]='Craft Table';BNAMES[22]='Door';BNAMES[23]='Ladder';BNAMES[24]='Farmland';BNAMES[25]='Wheat';BNAMES[28]='Bed';BNAMES[29]='Cactus';BNAMES[30]='Clay';BNAMES[31]='Gravel';BNAMES[32]='Obsidian';BNAMES[33]='Wood Wall';BNAMES[34]='Stone Wall';BNAMES[35]='Wood Roof';BNAMES[36]='Wood Floor';BNAMES[37]='Campfire';BNAMES[38]='Anvil';BNAMES[39]='Workbench';
 var BCOLORS=[];BCOLORS[1]='#8B6914';BCOLORS[2]='#4a8f3f';BCOLORS[3]='#808080';BCOLORS[4]='#e8d68c';BCOLORS[5]='#8B6B3D';BCOLORS[6]='#2d6b1e';BCOLORS[7]='#333';BCOLORS[8]='#b08060';BCOLORS[9]='#ffd700';BCOLORS[10]='#5CF0EE';BCOLORS[11]='#b8945a';BCOLORS[12]='#6a6a6a';BCOLORS[13]='#222';BCOLORS[14]='#3070c0';BCOLORS[15]='#f0f0ff';BCOLORS[16]='#a0d0ff';BCOLORS[17]='#e0e8ff';BCOLORS[18]='#ff8800';BCOLORS[19]='#555';BCOLORS[20]='#a08030';BCOLORS[21]='#9a7040';BCOLORS[22]='#8B6B3D';BCOLORS[23]='#a08040';BCOLORS[24]='#5a3a10';BCOLORS[25]='#c8b020';BCOLORS[28]='#c03030';BCOLORS[29]='#2d8a2d';BCOLORS[30]='#a0a0b0';BCOLORS[31]='#909090';BCOLORS[32]='#1a0a2e';BCOLORS[33]='#8B6B3D';BCOLORS[34]='#707070';BCOLORS[35]='#6B4B2D';BCOLORS[36]='#a08050';BCOLORS[37]='#ff6600';BCOLORS[38]='#444';BCOLORS[39]='#7a5030';
-var IT={WOOD_PICK:101,STONE_PICK:102,IRON_PICK:103,DIAMOND_PICK:104,WOOD_SWORD:105,STONE_SWORD:106,IRON_SWORD:107,DIAMOND_SWORD:108,WOOD_AXE:109,STONE_AXE:110,WOOD_LOG:111,STICK:112,COAL:113,IRON_INGOT:114,GOLD_INGOT:115,DIAMOND:116,RAW_MEAT:120,COOKED_MEAT:121,BERRIES:122,APPLE:123,BREAD:124,FISH:125,COOKED_FISH:126,SEEDS:127,WHEAT:128,BOW:130,ARROW:131,MAP:132,COMPASS:133,BANDAGE:134,MEDKIT:135,NAILS:136,ROPE:137,JOURNAL:140,KEY:141,GOLD_COIN:142};
-var INAMES=[];INAMES[101]='Wood Pick';INAMES[102]='Stone Pick';INAMES[103]='Iron Pick';INAMES[104]='Diamond Pick';INAMES[105]='Wood Sword';INAMES[106]='Stone Sword';INAMES[107]='Iron Sword';INAMES[108]='Diamond Sword';INAMES[109]='Wood Axe';INAMES[110]='Stone Axe';INAMES[111]='Wood Log';INAMES[112]='Stick';INAMES[113]='Coal';INAMES[114]='Iron Ingot';INAMES[115]='Gold Ingot';INAMES[116]='Diamond';INAMES[120]='Raw Meat';INAMES[121]='Cooked Meat';INAMES[122]='Berries';INAMES[123]='Apple';INAMES[124]='Bread';INAMES[125]='Fish';INAMES[126]='Cooked Fish';INAMES[127]='Seeds';INAMES[128]='Wheat';INAMES[130]='Bow';INAMES[131]='Arrow';INAMES[132]='Map';INAMES[133]='Compass';INAMES[134]='Bandage';INAMES[135]='Medkit';INAMES[136]='Nails';INAMES[137]='Rope';INAMES[140]='Journal';INAMES[141]='Key';INAMES[142]='Gold Coin';
-var ICOLORS=[];ICOLORS[101]='#b8945a';ICOLORS[102]='#888';ICOLORS[103]='#D8D8D8';ICOLORS[104]='#5CF0EE';ICOLORS[105]='#b8945a';ICOLORS[106]='#888';ICOLORS[107]='#D8D8D8';ICOLORS[108]='#5CF0EE';ICOLORS[109]='#b8945a';ICOLORS[110]='#888';ICOLORS[111]='#8B6B3D';ICOLORS[112]='#a08040';ICOLORS[113]='#333';ICOLORS[114]='#D8D8D8';ICOLORS[115]='#ffd700';ICOLORS[116]='#5CF0EE';ICOLORS[120]='#ff6060';ICOLORS[121]='#c08040';ICOLORS[122]='#8040ff';ICOLORS[123]='#ff3030';ICOLORS[124]='#d8a040';ICOLORS[125]='#6090c0';ICOLORS[126]='#80b060';ICOLORS[127]='#c8b020';ICOLORS[130]='#a08040';ICOLORS[131]='#888';ICOLORS[132]='#e8d68c';ICOLORS[133]='#ff0';ICOLORS[134]='#ff8080';ICOLORS[135]='#ff0000';ICOLORS[136]='#aaa';ICOLORS[137]='#a08040';ICOLORS[140]='#e8d68c';ICOLORS[141]='#ffd700';ICOLORS[142]='#ffd700';
-var TOOL_TIER={101:'wood',102:'stone',103:'iron',104:'diamond',105:'wood',106:'stone',107:'iron',108:'diamond',109:'wood',110:'stone',130:'wood'};
+var IT={WOOD_PICK:101,STONE_PICK:102,IRON_PICK:103,DIAMOND_PICK:104,WOOD_SWORD:105,STONE_SWORD:106,IRON_SWORD:107,DIAMOND_SWORD:108,WOOD_AXE:109,STONE_AXE:110,WOOD_LOG:111,STICK:112,COAL:113,IRON_INGOT:114,GOLD_INGOT:115,DIAMOND:116,RAW_MEAT:120,COOKED_MEAT:121,BERRIES:122,APPLE:123,BREAD:124,FISH:125,COOKED_FISH:126,SEEDS:127,WHEAT:128,BOW:130,ARROW:131,MAP:132,COMPASS:133,BANDAGE:134,MEDKIT:135,NAILS:136,ROPE:137,FISHING_ROD:138,JOURNAL:140,KEY:141,GOLD_COIN:142,ANCIENT_RELIC:143};
+var INAMES=[];INAMES[101]='Wood Pick';INAMES[102]='Stone Pick';INAMES[103]='Iron Pick';INAMES[104]='Diamond Pick';INAMES[105]='Wood Sword';INAMES[106]='Stone Sword';INAMES[107]='Iron Sword';INAMES[108]='Diamond Sword';INAMES[109]='Wood Axe';INAMES[110]='Stone Axe';INAMES[111]='Wood Log';INAMES[112]='Stick';INAMES[113]='Coal';INAMES[114]='Iron Ingot';INAMES[115]='Gold Ingot';INAMES[116]='Diamond';INAMES[120]='Raw Meat';INAMES[121]='Cooked Meat';INAMES[122]='Berries';INAMES[123]='Apple';INAMES[124]='Bread';INAMES[125]='Fish';INAMES[126]='Cooked Fish';INAMES[127]='Seeds';INAMES[128]='Wheat';INAMES[130]='Bow';INAMES[131]='Arrow';INAMES[132]='Map';INAMES[133]='Compass';INAMES[134]='Bandage';INAMES[135]='Medkit';INAMES[136]='Nails';INAMES[137]='Rope';INAMES[138]='Fishing Rod';INAMES[140]='Journal';INAMES[141]='Key';INAMES[142]='Gold Coin';INAMES[143]='Ancient Relic';
+var ICOLORS=[];ICOLORS[101]='#b8945a';ICOLORS[102]='#888';ICOLORS[103]='#D8D8D8';ICOLORS[104]='#5CF0EE';ICOLORS[105]='#b8945a';ICOLORS[106]='#888';ICOLORS[107]='#D8D8D8';ICOLORS[108]='#5CF0EE';ICOLORS[109]='#b8945a';ICOLORS[110]='#888';ICOLORS[111]='#8B6B3D';ICOLORS[112]='#a08040';ICOLORS[113]='#333';ICOLORS[114]='#D8D8D8';ICOLORS[115]='#ffd700';ICOLORS[116]='#5CF0EE';ICOLORS[120]='#ff6060';ICOLORS[121]='#c08040';ICOLORS[122]='#8040ff';ICOLORS[123]='#ff3030';ICOLORS[124]='#d8a040';ICOLORS[125]='#6090c0';ICOLORS[126]='#80b060';ICOLORS[127]='#c8b020';ICOLORS[130]='#a08040';ICOLORS[131]='#888';ICOLORS[132]='#e8d68c';ICOLORS[133]='#ff0';ICOLORS[134]='#ff8080';ICOLORS[135]='#ff0000';ICOLORS[136]='#aaa';ICOLORS[137]='#a08040';ICOLORS[138]='#a08040';ICOLORS[140]='#e8d68c';ICOLORS[141]='#ffd700';ICOLORS[142]='#ffd700';ICOLORS[143]='#a0a0ff';
+var TOOL_TIER={101:'wood',102:'stone',103:'iron',104:'diamond',105:'wood',106:'stone',107:'iron',108:'diamond',109:'wood',110:'stone',130:'wood',138:'wood'};
 var TIER_DUR={wood:60,stone:132,iron:251,diamond:1562};
 var TIER_POWER={wood:1,stone:2,iron:3,diamond:4};
 var BIOME={FOREST:0,DESERT:1,TUNDRA:2,MOUNTAIN:3,SWAMP:4};
 var BIOME_NAMES=['Forest','Desert','Tundra','Mountain','Swamp'];
 var BIOME_TEMP=[20,35,-10,5,25];
-var ENT={ZOMBIE:1,SKELETON:2,WOLF:3,BEAR:4};
+var ENT={ZOMBIE:1,SKELETON:2,WOLF:3,BEAR:4,BOSS:5};
 var WEATHER={CLEAR:0,RAIN:1,STORM:2,SNOW:3,HEATWAVE:4,FOG:5};
 
 var canvas,ctx,gameState='title',gameMode='survival';
@@ -189,7 +189,7 @@ var currentChest=null,currentNPC=null;
 var skillPoints=0;
 var skills={gathering:{level:0,name:'Gathering',desc:'Faster mining'},crafting:{level:0,name:'Crafting',desc:'Unlock recipes'},combat:{level:0,name:'Combat',desc:'More damage'},building:{level:0,name:'Building',desc:'Stronger builds'},survival:{level:0,name:'Survival',desc:'Less hunger'},exploration:{level:0,name:'Explore',desc:'See further'}};
 var xp=0,xpToNext=100,playerLevel=1;
-var gameTime=0,chestData={};
+var gameTime=0,chestData={};var stats={kills:0,blocksMined:0,fishCaught:0,bossesKilled:0};var fishingState=null;var screenShake=0;var audioCtx=null;var bossActive=false;
 
 function noise1D(x){var n=Math.sin(x*127.1+311.7)*43758.5453;return n-Math.floor(n);}
 function simplexNoise(x){var i=Math.floor(x),f=x-i;var a=noise1D(i),b=noise1D(i+1);var t=f*f*(3-2*f);return a*(1-t)+b*t;}
@@ -328,7 +328,7 @@ for(var i=raindrops.length-1;i>=0;i--){var r=raindrops[i];r.x+=r.vx*dt;r.y+=r.vy
 if(raindrops.length>200)raindrops.splice(0,raindrops.length-200);
 if(weatherState===WEATHER.STORM&&Math.random()<dt*0.5)lightningFlash=1;
 if(lightningFlash>0)lightningFlash=Math.max(0,lightningFlash-3*dt);
-updatePlayer(dt);updateEntities(dt);
+updatePlayer(dt);trySpawnBoss();updateEntities(dt);updateFishing(dt);
 for(var i=particles.length-1;i>=0;i--){particles[i].life-=dt;if(particles[i].life<=0){particles.splice(i,1);continue;}particles[i].x+=particles[i].vx*dt;particles[i].y+=particles[i].vy*dt;}
 for(var i=droppedItems.length-1;i>=0;i--){var d=droppedItems[i];d.life-=dt;if(d.life<=0){droppedItems.splice(i,1);continue;}if(!d.grounded){d.vy+=80*dt;d.x+=d.vx*dt;d.y+=d.vy*dt;var bx=Math.floor(d.x/TILE),by=Math.floor((d.y+4)/TILE);if(bx>=0&&bx<WORLD_W&&by>=0&&by<WORLD_H&&isSolid(bx,by)){d.y=by*TILE-4;d.vy=0;d.vx=0;d.grounded=true;}}
 var dx=player.x+player.w/2-d.x,dy=player.y+player.h/2-d.y;if(Math.sqrt(dx*dx+dy*dy)<12&&addItem(d.id,d.count)){droppedItems.splice(i,1);showMsg('Got '+(INAMES[d.id]||BNAMES[d.id]||'item')+' x'+d.count);}}}
@@ -337,7 +337,7 @@ var baseTemp=BIOME_TEMP[currentBiome]||20;ambientTemp=baseTemp+Math.sin(dayTime*
 if(gameMode!=='creative'){var drain=(0.05+Math.abs(player.vx)*0.001)*(ambientTemp<0?1.3:1)*Math.max(0.5,1-skills.survival.level*0.1);player.hunger=Math.max(0,player.hunger-drain*dt);if(player.hunger<=0){player.hp-=0.5*dt;if(player.hp<=0)killPlayer('starvation');}}
 if(gameMode!=='creative'&&player.grounded&&Math.abs(player.vx)<10)player.stamina=Math.min(player.maxStamina,player.stamina+3*dt);
 if(gameMode!=='creative'&&player.hunger>player.maxHunger*0.7&&player.hp<player.maxHp)player.hp=Math.min(player.maxHp,player.hp+0.2*dt);
-if(xp>=xpToNext){xp-=xpToNext;playerLevel++;skillPoints++;xpToNext=Math.floor(xpToNext*1.5);showMsg('Level Up! Lv.'+playerLevel);}}
+if(screenShake>0)screenShake=Math.max(0,screenShake-dt*10);if(xp>=xpToNext){xp-=xpToNext;playerLevel++;skillPoints++;xpToNext=Math.floor(xpToNext*1.5);showMsg('Level Up! Lv.'+playerLevel);}}
 render();gameLoopId=requestAnimationFrame(gameLoop);}
 
 function isSolid(x,y){if(x<0||x>=WORLD_W||y<0||y>=WORLD_H)return y>=WORLD_H;var b=world[x][y];return b!==BLK.AIR&&b!==BLK.WATER&&b!==BLK.TORCH&&b!==BLK.LADDER;}
@@ -351,7 +351,7 @@ var nx=player.x+player.vx*dt,ny=player.y+player.vy*dt;
 var bx1=Math.floor(nx/TILE),bx2=Math.floor((nx+player.w)/TILE),by1=Math.floor(player.y/TILE),by2=Math.floor((player.y+player.h)/TILE);
 var blocked=false;for(var cx=bx1;cx<=bx2;cx++){for(var cy=by1;cy<=by2;cy++){if(isSolid(cx,cy)){blocked=true;break;}}if(blocked)break;}
 if(!blocked)player.x=nx;else player.vx=0;
-player.grayed=false;
+player.grounded=false;
 var nbx1=Math.floor(player.x/TILE),nbx2=Math.floor((player.x+player.w)/TILE),nby1=Math.floor(ny/TILE),nby2=Math.floor((ny+player.h)/TILE);
 var blockedY=false;for(var cx=nbx1;cx<=nbx2;cx++){for(var cy=nby1;cy<=nby2;cy++){if(isSolid(cx,cy)){blockedY=true;break;}}if(blockedY)break;}
 if(!blockedY)player.y=ny;else{if(player.vy>0){player.grounded=true;player.y=Math.floor((player.y+player.h)/TILE)*TILE-player.h;}player.vy=0;}
@@ -362,10 +362,10 @@ function updateEntities(dt){
 if(entities.length<8&&Math.random()<dt*0.3)spawnOne();
 for(var i=entities.length-1;i>=0;i--){
 var e=entities[i];
-if(e.hp<=0){if(e.loot){for(var l=0;l<e.loot.length;l++){if(Math.random()<e.loot[l].chance)droppedItems.push({id:e.loot[l].id,count:e.loot[l].amt,x:e.x,y:e.y,vx:(Math.random()-0.5)*30,vy:-20,grounded:false,life:600});}}addXP(10+e.type*5);entities.splice(i,1);continue;}
-e.attackCooldown-=dt;e.aiTimer-=dt;
+if(e.hp<=0){if(e.loot){for(var l=0;l<e.loot.length;l++){if(Math.random()<e.loot[l].chance)droppedItems.push({id:e.loot[l].id,count:e.loot[l].amt,x:e.x,y:e.y,vx:(Math.random()-0.5)*30,vy:-20,grounded:false,life:600});}}addXP(10+e.type*5);stats.kills++;if(e.type===ENT.BOSS){stats.bossesKilled++;bossActive=false;}playSound('kill');entities.splice(i,1);continue;}
+if(e.type===ENT.BOSS){updateBoss(e,dt);continue;}e.attackCooldown-=dt;e.aiTimer-=dt;
 var dx=player.x-e.x,dy=player.y-e.y,dist=Math.sqrt(dx*dx+dy*dy);
-if(dist<e.aggroRange){e.facing=dx>0?1:-1;e.vx=e.facing*e.speed;if(dist<12&&e.attackCooldown<=0&&player.invulnerable<=0){player.hp-=e.damage;player.invulnerable=0.5;e.attackCooldown=1;if(player.hp<=0)killPlayer('a creature');}}
+if(dist<e.aggroRange){e.facing=dx>0?1:-1;e.vx=e.facing*e.speed;if(dist<12&&e.attackCooldown<=0&&player.invulnerable<=0){player.hp-=e.damage;player.invulnerable=0.5;e.attackCooldown=1;playSound('hurt');triggerShake(3);if(player.hp<=0)killPlayer('a creature');}}
 else{if(e.aiTimer<=0){e.aiTimer=2+Math.random()*3;e.facing=Math.random()>0.5?1:-1;}e.vx=e.facing*e.speed*0.3;}
 e.vy+=120*dt;e.x+=e.vx*dt;e.y+=e.vy*dt;
 var ebx=Math.floor((e.x+e.w/2)/TILE),eby=Math.floor((e.y+e.h)/TILE);
@@ -373,8 +373,7 @@ if(ebx>=0&&ebx<WORLD_W&&eby>=0&&eby<WORLD_H&&isSolid(ebx,eby)){e.y=eby*TILE-e.h;
 if(e.x<0)e.x=0;if(e.x>WORLD_W*TILE-e.w)e.x=WORLD_W*TILE-e.w;
 if((e.type===ENT.ZOMBIE||e.type===ENT.SKELETON)&&dayTime>0.25&&dayTime<0.75&&weatherIntensity<0.3){
 var ebx2=Math.floor((e.x+e.w/2)/TILE);
-if(ebx2>=0&&ebx2<WORLD_W){var shy=0;for(var sy=0;sy<WORLD_H;sy++){if(isSolid(ebx2,sy)){shy=sy;break;}}if((e.y/TILE)>shy){e.hp-=0.5*dt;if(Math.random()<dt*2)particles.push({x:e.x+e.w/2,y:e.y,type:'smoke',life:0.5,vx:(Math.random()-0.5)*10,vy:-10});}}}}
-}
+if(ebx2>=0&&ebx2<WORLD_W){var shy=0;for(var sy=0;sy<WORLD_H;sy++){if(isSolid(ebx2,sy)){shy=sy;break;}}if((e.y/TILE)>shy){e.hp-=0.5*dt;if(Math.random()<dt*2)particles.push({x:e.x+e.w/2,y:e.y,type:'smoke',life:0.5,vx:(Math.random()-0.5)*10,vy:-10});}}}
 function spawnOne(){
 var isNight=dayTime>0.7||dayTime<0.25;
 if(!isNight&&Math.random()<0.7)return;
@@ -452,7 +451,7 @@ var ccx=cursorX*TILE-camX,ccy=cursorY*TILE-camY;
 ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=1;ctx.strokeRect(ccx,ccy,TILE,TILE);
 var cb=world[cursorX]&&world[cursorX][cursorY];
 if(cb&&cb!==BLK.AIR&&cb!==BLK.WATER){var bn=BNAMES[cb]||'Block';ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(ccx,ccy-9,Math.max(20,bn.length*3.5),8);ctx.fillStyle='#fff';ctx.font='5px monospace';ctx.textAlign='left';ctx.fillText(bn,ccx+1,ccy-2);}
-ctx.restore();renderHUD();}
+renderMiningProgress();renderWeatherOverlay();renderTorchLight();renderCampfireLights();ctx.restore();renderHUD();renderBossHealth();}
 
 function getSkyColor(){
 if(isNightTime())return'#0a0a2a';
@@ -546,8 +545,8 @@ var held=getHeldItem();var isPk=held.id>=101&&held.id<=104;
 var tier=isPk?TIER_POWER[TOOL_TIER[held.id]]||1:1;
 var bonus=1+skills.gathering.level*0.15;
 if(miningX!==x||miningY!==y){miningProgress=0;miningX=x;miningY=y;}
-miningProgress+=tier*0.05;
-if(miningProgress>=1){world[x][y]=BLK.AIR;miningProgress=0;
+miningProgress+=tier*0.05;playSound('mine');
+if(miningProgress>=1){world[x][y]=BLK.AIR;miningProgress=0;stats.blocksMined++;
 var drop=getBlockDrop(b);if(drop){var cnt=Math.ceil(drop.amt*bonus);addItem(drop.id,cnt);showMsg('Got '+(INAMES[drop.id]||BNAMES[drop.id]||'item')+' x'+cnt);addXP(2);}
 if(isPk)useToolDur(player.selectedSlot);
 for(var i=0;i<3;i++)particles.push({x:x*TILE+TILE/2,y:y*TILE+TILE/2,type:'dust',life:0.5+Math.random()*0.5,vx:(Math.random()-0.5)*20,vy:-10-Math.random()*10});
@@ -575,7 +574,7 @@ if(world[x][y]!==BLK.AIR)return;
 var pbx1=Math.floor(player.x/TILE),pbx2=Math.floor((player.x+player.w)/TILE);
 var pby1=Math.floor(player.y/TILE),pby2=Math.floor((player.y+player.h)/TILE);
 if(x>=pbx1&&x<=pbx2&&y>=pby1&&y<=pby2)return;
-world[x][y]=id;removeItem(id,1);r1Vibrate(20);}
+world[x][y]=id;removeItem(id,1);playSound('place');r1Vibrate(20);
 
 function eatFood(id){
 var hr=0,hg=0;
@@ -608,7 +607,7 @@ generateWorld();gameState='playing';gameMode='survival';
 document.getElementById('title').style.display='none';
 document.getElementById('r1-hud').style.display='flex';
 canvas=document.getElementById('game');ctx=canvas.getContext('2d');
-lastTime=performance.now();gameLoopId=requestAnimationFrame(gameLoop);}
+lastTime=performance.now();initAudio();gameLoopId=requestAnimationFrame(gameLoop);}
 
 function toggleCraftingMenu(){if(gameState==='crafting'){closeCrafting();}else if(gameState==='playing'){showCrafting();}}
 function showCrafting(){gameState='crafting';document.getElementById('craft-screen').style.display='flex';renderCraftList();}
@@ -645,7 +644,7 @@ var RECIPES=[
 {name:'Bandage x2',outId:134,outCnt:2,req:[[111,2]],tier:0},
 {name:'Medkit',outId:135,outCnt:1,req:[[134,3],[114,1]],tier:2},
 {name:'Nails x8',outId:136,outCnt:8,req:[[114,1]],tier:2},
-{name:'Rope x2',outId:137,outCnt:2,req:[[111,3]],tier:0},
+{name:'Rope x2',outId:137,outCnt:2,req:[[111,3]],tier:0},{name:'Fishing Rod',outId:138,outCnt:1,req:[[112,3],[137,2]],tier:1},
 {name:'Anvil',outId:38,outCnt:1,req:[[114,5],[12,3]],tier:2},
 {name:'Workbench',outId:39,outCnt:1,req:[[111,4],[114,2],[12,2]],tier:2}];
 for(var r=0;r<RECIPES.length;r++){
@@ -666,7 +665,7 @@ function showBuildMode(){gameState='build';document.getElementById('build-screen
 function closeBuildMode(){gameState='playing';buildMode=false;buildSelection=null;document.getElementById('build-screen').style.display='none';}
 function renderBuildList(){
 var bl=document.getElementById('build-list');if(!bl)return;bl.innerHTML='';
-var BRECS=[{name:'Wood Wall',id:33,cost:[{id:111,amt:1}]},{name:'Stone Wall',id:34,cost:[{id:12,amt:1}]},{name:'Wood Floor',id:36,cost:[{id:111,amt:1}]},{name:'Door',id:22,cost:[{id:111,amt:3}]},{name:'Torch',id:18,cost:[{id:112,amt:1},{id:113,amt:1}]},{name:'Ladder',id:23,cost:[{id:112,amt:3}]},{name:'Chest',id:20,cost:[{id:111,amt:4}]},{name:'Furnace',id:19,cost:[{id:12,amt:4}]},{name:'Campfire',id:37,cost:[{id:111,amt:1},{id:12,amt:2}]},{name:'Bed',id:28,cost:[{id:111,amt:2},{id:112,amt:1}]},{name:'Craft Table',id:21,cost:[{id:111,amt:2}]}];
+var BRECS=[{name:'Wood Wall',id:33,cost:[{id:111,amt:1}]},{name:'Stone Wall',id:34,cost:[{id:12,amt:1}]},{name:'Wood Floor',id:36,cost:[{id:111,amt:1}]},{name:'Door',id:22,cost:[{id:111,amt:3}]},{name:'Torch',id:18,cost:[{id:112,amt:1},{id:113,amt:1}]},{name:'Ladder',id:23,cost:[{id:112,amt:3}]},{name:'Chest',id:20,cost:[{id:111,amt:4}]},{name:'Furnace',id:19,cost:[{id:12,amt:4}]},{name:'Campfire',id:37,cost:[{id:111,amt:1},{id:12,amt:2}]},{name:'Bed',id:28,cost:[{id:111,amt:2},{id:112,amt:1}]},{name:'Craft Table',id:21,cost:[{id:111,amt:2}]},{name:'Fishing Rod',id:138,cost:[{id:112,amt:3},{id:137,amt:2}]}];
 for(var i=0;i<BRECS.length;i++){
 var b=BRECS[i];var can=true;for(var j=0;j<b.cost.length;j++){if(countItem(b.cost[j].id)<b.cost[j].amt)can=false;}
 var cost='';for(var j=0;j<b.cost.length;j++){cost+=(BNAMES[b.cost[j].id]||INAMES[b.cost[j].id]||'?')+'x'+b.cost[j].amt+' ';}
@@ -760,7 +759,7 @@ var held=getHeldItem();panel.innerHTML='';if(!held||held.id===0)return;
 var actions=[];
 if([120,121,122,123,124,125,126].indexOf(held.id)!==-1)actions.push({action:function(){eatFood(held.id);},icon:'Eat',cls:'food'});
 if([105,106,107,108,130].indexOf(held.id)!==-1)actions.push({action:function(){tryAttack();},icon:'Atk',cls:'weapon'});
-if([101,102,103,104,109,110].indexOf(held.id)!==-1)actions.push({action:function(){repairTool();},icon:'Fix',cls:'tool'});
+if([101,102,103,104,109,110].indexOf(held.id)!==-1)actions.push({action:function(){repairTool();},icon:'Fix',cls:'tool'});if(held.id===IT.FISHING_ROD)actions.push({action:function(){tryFishing();},icon:'Fish',cls:'tool'});
 if(held.id<100&&held.id>0)actions.push({action:function(){placeBlock(cursorX,cursorY,held.id);},icon:'Place',cls:'block'});
 if([33,34,35,36,18,20,19,21,22,28,37].indexOf(held.id)!==-1)actions.push({action:function(){enterBuildMode(held.id);},icon:'Build',cls:'build'});
 if(held.id===134)actions.push({action:function(){useBandage();},icon:'Heal',cls:'food'});
@@ -785,6 +784,110 @@ document.getElementById('build-screen').querySelector('span').onclick=closeBuild
 document.getElementById('skill-screen').querySelector('span').onclick=closeSkills;
 document.getElementById('inventory-screen').querySelector('span').onclick=closeInventory;
 document.getElementById('chest-screen').querySelector('span').onclick=closeChest;
+// === PHASE 2: AUDIO ===
+function initAudio(){if(audioCtx)return;try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+function playSound(t){
+if(!audioCtx)return;try{
+var o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.connect(g);g.connect(audioCtx.destination);var n=audioCtx.currentTime;
+if(t==='mine'){o.frequency.setValueAtTime(200,n);o.frequency.exponentialRampToValueAtTime(80,n+0.08);g.gain.setValueAtTime(0.12,n);g.gain.exponentialRampToValueAtTime(0.001,n+0.08);o.start(n);o.stop(n+0.08);}
+else if(t==='place'){o.frequency.setValueAtTime(150,n);g.gain.setValueAtTime(0.08,n);g.gain.exponentialRampToValueAtTime(0.001,n+0.06);o.start(n);o.stop(n+0.06);}
+else if(t==='eat'){o.frequency.setValueAtTime(400,n);o.frequency.exponentialRampToValueAtTime(600,n+0.05);g.gain.setValueAtTime(0.06,n);g.gain.exponentialRampToValueAtTime(0.001,n+0.05);o.start(n);o.stop(n+0.05);}
+else if(t==='hurt'){o.frequency.setValueAtTime(100,n);g.gain.setValueAtTime(0.1,n);g.gain.exponentialRampToValueAtTime(0.001,n+0.1);o.start(n);o.stop(n+0.1);}
+else if(t==='kill'){o.frequency.setValueAtTime(300,n);o.frequency.exponentialRampToValueAtTime(100,n+0.15);g.gain.setValueAtTime(0.08,n);g.gain.exponentialRampToValueAtTime(0.001,n+0.15);o.start(n);o.stop(n+0.15);}
+}catch(e){}}
+
+// === PHASE 2: SCREEN SHAKE ===
+function triggerShake(i){screenShake=i||3;}
+
+// === PHASE 2: FISHING ===
+function tryFishing(){
+var h=getHeldItem();if(h.id!==IT.FISHING_ROD){showMsg('Need fishing rod');return;}
+if(cursorX>=0&&cursorX<WORLD_W&&cursorY>=0&&cursorY<WORLD_H&&world[cursorX][cursorY]===BLK.WATER){
+if(fishingState){showMsg('Already fishing');return;}
+fishingState={timer:0,active:true};showMsg('Fishing...');
+}else{showMsg('Need water');}}
+function updateFishing(dt){
+if(!fishingState||!fishingState.active)return;
+fishingState.timer+=dt;
+if(fishingState.timer>3){fishingState.timer=0;
+if(Math.random()<0.3){addItem(IT.FISH,1);showMsg('Caught a fish!');stats.fishCaught++;playSound('eat');fishingState.active=false;fishingState=null;}}}
+
+// === PHASE 2: BOSS ===
+function trySpawnBoss(){
+if(bossActive)return;if(player.hp<player.maxHp)return;
+if(dayTime<0.7&&dayTime>0.2)return;if(Math.random()>0.001)return;
+var a=Math.random()*Math.PI*2,d=80+Math.random()*40;
+var bx=player.x+Math.cos(a)*d,bbx=Math.floor(bx/TILE);
+if(bbx<0||bbx>=WORLD_W)return;var bh=heightMap[Math.min(bbx,WORLD_W-1)];if(bh<=SEA)return;
+entities.push({x:bx,y:(bh-3)*TILE,w:12,h:20,vx:0,vy:0,type:ENT.BOSS,hp:50,maxHp:50,damage:5,speed:10,facing:-1,aiTimer:0,attackCooldown:0,aggroRange:120,phaseTimer:0,phase:0,loot:[{id:IT.DIAMOND,chance:1,amt:3},{id:IT.GOLD_INGOT,chance:1,amt:5},{id:IT.ANCIENT_RELIC,chance:1,amt:1}]});
+bossActive=true;showMsg('A powerful enemy approaches!');triggerShake(5);}
+
+function updateBoss(e,dt){
+e.phaseTimer-=dt;e.attackCooldown-=dt;
+var dx=player.x-e.x,dy=player.y-e.y,dist=Math.sqrt(dx*dx+dy*dy);
+e.facing=dx>0?1:-1;
+if(e.phaseTimer<=0){e.phase=(e.phase+1)%3;e.phaseTimer=3+Math.random()*2;
+if(e.phase===0){e.vx=e.facing*80;}else if(e.phase===1){if(dist<25&&player.invulnerable<=0){player.hp-=e.damage;player.invulnerable=0.5;triggerShake(4);if(player.hp<=0)killPlayer('the Ancient Guardian');}e.vx=0;}else{for(var i=0;i<2;i++){var sx=e.x+(Math.random()-0.5)*40;entities.push({x:sx,y:e.y,w:6,h:14,vx:0,vy:0,type:ENT.ZOMBIE,hp:6,maxHp:6,damage:2,speed:15,facing:Math.random()>0.5?1:-1,aiTimer:0,attackCooldown:0,aggroRange:80,loot:getLoot(ENT.ZOMBIE)});}e.vx=0;}}
+if(e.phase===0){e.x+=e.vx*dt;e.vx*=0.95;}else{if(dist>15)e.vx=e.facing*e.speed*0.5;else e.vx=0;}
+if(dist<15&&e.attackCooldown<=0&&player.invulnerable<=0){player.hp-=e.damage*0.5;player.invulnerable=0.3;e.attackCooldown=0.8;triggerShake(2);if(player.hp<=0)killPlayer('the Ancient Guardian');}
+e.vy+=120*dt;e.x+=e.vx*dt;e.y+=e.vy*dt;
+var ebx=Math.floor((e.x+e.w/2)/TILE),eby=Math.floor((e.y+e.h)/TILE);
+if(ebx>=0&&ebx<WORLD_W&&eby>=0&&eby<WORLD_H&&isSolid(ebx,eby)){e.y=eby*TILE-e.h;e.vy=0;}
+if(e.x<0)e.x=0;if(e.x>WORLD_W*TILE-e.w)e.x=WORLD_W*TILE-e.w;}
+
+// === PHASE 2: RENDER POLISH ===
+function renderWeatherOverlay(){
+if(weatherIntensity<0.01)return;
+if(weatherState===WEATHER.RAIN||weatherState===WEATHER.STORM){
+ctx.strokeStyle='rgba(180,200,255,'+(0.3+weatherIntensity*0.4)+')';ctx.lineWidth=1;ctx.beginPath();
+for(var i=0;i<raindrops.length;i++){var r=raindrops[i];ctx.moveTo(r.x-camX*0.5,r.y);ctx.lineTo(r.x-camX*0.5-1,r.y+r.len);}ctx.stroke();}
+if(weatherState===WEATHER.SNOW){ctx.fillStyle='rgba(255,255,255,'+(0.5+weatherIntensity*0.3)+')';
+for(var i=0;i<raindrops.length;i++){var r=raindrops[i];ctx.fillRect(r.x-camX*0.5,r.y,2,2);}}
+if(weatherState===WEATHER.FOG){ctx.fillStyle='rgba(200,200,210,'+weatherIntensity*0.4+')';ctx.fillRect(0,0,W,H);}
+if(lightningFlash>0){ctx.fillStyle='rgba(255,255,240,'+lightningFlash*0.6+')';ctx.fillRect(0,0,W,H);}}
+
+function renderBossHealth(){
+if(!bossActive)return;
+for(var i=0;i<entities.length;i++){var e=entities[i];
+if(e.type===ENT.BOSS&&e.hp>0){
+ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(40,260,160,10);
+ctx.fillStyle='#600';ctx.fillRect(41,261,158,8);
+ctx.fillStyle='#f00';ctx.fillRect(41,261,158*(e.hp/e.maxHp),8);
+ctx.fillStyle='#fff';ctx.font='6px monospace';ctx.textAlign='center';ctx.fillText('ANCIENT GUARDIAN',120,258);ctx.textAlign='left';return;}}}
+
+function renderMiningProgress(){
+if(miningProgress>0&&miningX>=0&&miningY>=0){
+var px=miningX*TILE-camX,py=miningY*TILE-camY;
+ctx.fillStyle='rgba(0,0,0,'+(miningProgress*0.5)+')';ctx.fillRect(px,py,TILE,TILE);
+ctx.strokeStyle='rgba(255,255,255,'+miningProgress+')';ctx.lineWidth=0.5;ctx.beginPath();
+ctx.moveTo(px+TILE*0.2,py+TILE*0.3);ctx.lineTo(px+TILE*0.5,py+TILE*0.5);ctx.lineTo(px+TILE*0.8,py+TILE*0.4);
+if(miningProgress>0.5){ctx.moveTo(px+TILE*0.3,py+TILE*0.7);ctx.lineTo(px+TILE*0.6,py+TILE*0.6);}ctx.stroke();}}
+
+function renderTorchLight(){
+if(player.lightRadius>0){
+var px=player.x-camX+player.w/2,py=player.y-camY+player.h/2;
+var g=ctx.createRadialGradient(px,py,0,px,py,player.lightRadius*TILE);
+g.addColorStop(0,'rgba(255,200,100,0.12)');g.addColorStop(1,'rgba(255,200,100,0)');
+ctx.fillStyle=g;ctx.fillRect(px-player.lightRadius*TILE,py-player.lightRadius*TILE,player.lightRadius*TILE*2,player.lightRadius*TILE*2);}}
+
+function renderCampfireLights(){
+var sx=Math.floor(camX/TILE),sy=Math.floor(camY/TILE);
+var ex=Math.min(sx+Math.ceil(W/TILE)+2,WORLD_W),ey=Math.min(sy+Math.ceil(H/TILE)+2,WORLD_H);
+for(var x=sx;x<ex;x++){for(var y=sy;y<ey;y++){
+if(x<0||y<0)continue;if(world[x][y]===BLK.CAMPFIRE){
+var px=x*TILE-camX+TILE/2,py=y*TILE-camY+TILE/2;
+var f=0.8+Math.sin(gameTime*5+x)*0.2;
+var g=ctx.createRadialGradient(px,py,0,px,py,4*TILE*f);
+g.addColorStop(0,'rgba(255,150,50,0.1)');g.addColorStop(1,'rgba(255,150,50,0)');
+ctx.fillStyle=g;ctx.fillRect(px-4*TILE,py-4*TILE,8*TILE,8*TILE);}}
+
+}
+}
+}
+}
+}
 </script>
 </body>
 </html>
+
