@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -189,7 +189,7 @@ var currentChest=null,currentNPC=null;
 var skillPoints=0;
 var skills={gathering:{level:0,name:'Gathering',desc:'Faster mining'},crafting:{level:0,name:'Crafting',desc:'Unlock recipes'},combat:{level:0,name:'Combat',desc:'More damage'},building:{level:0,name:'Building',desc:'Stronger builds'},survival:{level:0,name:'Survival',desc:'Less hunger'},exploration:{level:0,name:'Explore',desc:'See further'}};
 var xp=0,xpToNext=100,playerLevel=1;
-var gameTime=0,chestData={};var stats={kills:0,blocksMined:0,fishCaught:0,bossesKilled:0};var fishingState=null;var screenShake=0;var audioCtx=null;var bossActive=false;
+var gameTime=0,chestData={};var stats={kills:0,blocksMined:0,fishCaught:0,bossesKilled:0,questsCompleted:0};var fishingState=null;var screenShake=0;var audioCtx=null;var bossActive=false;
 
 function noise1D(x){var n=Math.sin(x*127.1+311.7)*43758.5453;return n-Math.floor(n);}
 function simplexNoise(x){var i=Math.floor(x),f=x-i;var a=noise1D(i),b=noise1D(i+1);var t=f*f*(3-2*f);return a*(1-t)+b*t;}
@@ -332,7 +332,7 @@ updatePlayer(dt);trySpawnBoss();updateEntities(dt);updateFishing(dt);
 for(var i=particles.length-1;i>=0;i--){particles[i].life-=dt;if(particles[i].life<=0){particles.splice(i,1);continue;}particles[i].x+=particles[i].vx*dt;particles[i].y+=particles[i].vy*dt;}
 for(var i=droppedItems.length-1;i>=0;i--){var d=droppedItems[i];d.life-=dt;if(d.life<=0){droppedItems.splice(i,1);continue;}if(!d.grounded){d.vy+=80*dt;d.x+=d.vx*dt;d.y+=d.vy*dt;var bx=Math.floor(d.x/TILE),by=Math.floor((d.y+4)/TILE);if(bx>=0&&bx<WORLD_W&&by>=0&&by<WORLD_H&&isSolid(bx,by)){d.y=by*TILE-4;d.vy=0;d.vx=0;d.grounded=true;}}
 var dx=player.x+player.w/2-d.x,dy=player.y+player.h/2-d.y;if(Math.sqrt(dx*dx+dy*dy)<12&&addItem(d.id,d.count)){droppedItems.splice(i,1);showMsg('Got '+(INAMES[d.id]||BNAMES[d.id]||'item')+' x'+d.count);}}}
-var bx=Math.floor(player.x/TILE);if(bx>=0&&bx<WORLD_W)currentBiome=biomeMap[bx];
+var bx=Math.floor(player.x/TILE);if(bx>=0&&bx<WORLD_W){var prevBiome=currentBiome;currentBiome=biomeMap[bx];if(prevBiome!==currentBiome)updateQuestProgress("explore",currentBiome,1);}
 var baseTemp=BIOME_TEMP[currentBiome]||20;ambientTemp=baseTemp+Math.sin(dayTime*Math.PI*2)*8+(weatherState===WEATHER.HEATWAVE?10:weatherState===WEATHER.SNOW?-10:0);
 if(gameMode!=='creative'){var drain=(0.05+Math.abs(player.vx)*0.001)*(ambientTemp<0?1.3:1)*Math.max(0.5,1-skills.survival.level*0.1);player.hunger=Math.max(0,player.hunger-drain*dt);if(player.hunger<=0){player.hp-=0.5*dt;if(player.hp<=0)killPlayer('starvation');}}
 if(gameMode!=='creative'&&player.grounded&&Math.abs(player.vx)<10)player.stamina=Math.min(player.maxStamina,player.stamina+3*dt);
@@ -362,7 +362,7 @@ function updateEntities(dt){
 if(entities.length<8&&Math.random()<dt*0.3)spawnOne();
 for(var i=entities.length-1;i>=0;i--){
 var e=entities[i];
-if(e.hp<=0){if(e.loot){for(var l=0;l<e.loot.length;l++){if(Math.random()<e.loot[l].chance)droppedItems.push({id:e.loot[l].id,count:e.loot[l].amt,x:e.x,y:e.y,vx:(Math.random()-0.5)*30,vy:-20,grounded:false,life:600});}}addXP(10+e.type*5);stats.kills++;if(e.type===ENT.BOSS){stats.bossesKilled++;bossActive=false;}playSound('kill');entities.splice(i,1);continue;}
+if(e.hp<=0){if(e.loot){for(var l=0;l<e.loot.length;l++){if(Math.random()<e.loot[l].chance)droppedItems.push({id:e.loot[l].id,count:e.loot[l].amt,x:e.x,y:e.y,vx:(Math.random()-0.5)*30,vy:-20,grounded:false,life:600});}}addXP(10+e.type*5);stats.kills++;if(e.type===ENT.BOSS){stats.bossesKilled++;bossActive=false;}updateQuestProgress("kill",e.type,1);playSound('kill');entities.splice(i,1);continue;}
 if(e.type===ENT.BOSS){updateBoss(e,dt);continue;}e.attackCooldown-=dt;e.aiTimer-=dt;
 var dx=player.x-e.x,dy=player.y-e.y,dist=Math.sqrt(dx*dx+dy*dy);
 if(dist<e.aggroRange){e.facing=dx>0?1:-1;e.vx=e.facing*e.speed;if(dist<12&&e.attackCooldown<=0&&player.invulnerable<=0){player.hp-=e.damage;player.invulnerable=0.5;e.attackCooldown=1;playSound('hurt');triggerShake(3);if(player.hp<=0)killPlayer('a creature');}}
@@ -607,7 +607,7 @@ generateWorld();gameState='playing';gameMode='survival';
 document.getElementById('title').style.display='none';
 document.getElementById('r1-hud').style.display='flex';
 canvas=document.getElementById('game');ctx=canvas.getContext('2d');
-lastTime=performance.now();initAudio();gameLoopId=requestAnimationFrame(gameLoop);}
+lastTime=performance.now();initAudio();initQuests();gameLoopId=requestAnimationFrame(gameLoop);}
 
 function toggleCraftingMenu(){if(gameState==='crafting'){closeCrafting();}else if(gameState==='playing'){showCrafting();}}
 function showCrafting(){gameState='crafting';document.getElementById('craft-screen').style.display='flex';renderCraftList();}
@@ -811,7 +811,7 @@ function updateFishing(dt){
 if(!fishingState||!fishingState.active)return;
 fishingState.timer+=dt;
 if(fishingState.timer>3){fishingState.timer=0;
-if(Math.random()<0.3){addItem(IT.FISH,1);showMsg('Caught a fish!');stats.fishCaught++;playSound('eat');fishingState.active=false;fishingState=null;}}}
+if(Math.random()<0.3){addItem(IT.FISH,1);showMsg('Caught a fish!');stats.fishCaught++;updateQuestProgress("gather","fish",1);playSound('eat');fishingState.active=false;fishingState=null;}}}
 
 // === PHASE 2: BOSS ===
 function trySpawnBoss(){
@@ -847,6 +847,97 @@ for(var i=0;i<raindrops.length;i++){var r=raindrops[i];ctx.fillRect(r.x-camX*0.5
 if(weatherState===WEATHER.FOG){ctx.fillStyle='rgba(200,200,210,'+weatherIntensity*0.4+')';ctx.fillRect(0,0,W,H);}
 if(lightningFlash>0){ctx.fillStyle='rgba(255,255,240,'+lightningFlash*0.6+')';ctx.fillRect(0,0,W,H);}}
 
+
+function initQuests() {
+  if (quests.length > 0) return; // already initialized
+  quests = [
+    {id:'kill_zombies', name:'Zombie Slayer', desc:'Kill 5 zombies', type:'kill', target:ENT.ZOMBIE, count:5, reward:{xp:50,item:IT.IRON_INGOT,itemCount:2}},
+    {id:'kill_skeletons', name:'Bone Collector', desc:'Kill 3 skeletons', type:'kill', target:ENT.SKELETON, count:3, reward:{xp:40,item:IT.ARROW,itemCount:10}},
+    {id:'gather_wood', name:'Lumberjack', desc:'Gather 20 wood logs', type:'gather', target:IT.WOOD_LOG, count:20, reward:{xp:30,skillPoints:1}},
+    {id:'explore_desert', name:'Desert Explorer', desc:'Reach the desert biome', type:'explore', target:BIOME.DESERT, count:1, reward:{xp:60,item:IT.MAP,itemCount:1}},
+    {id:'explore_mountain', name:'Mountain Climber', desc:'Reach the mountains', type:'explore', target:BIOME.MOUNTAIN, count:1, reward:{xp:80,item:IT.IRON_INGOT,itemCount:3}},
+    {id:'kill_boss', name:'Ancient Guardian', desc:'Defeat the Ancient Guardian', type:'kill', target:ENT.BOSS, count:1, reward:{xp:200,skillPoints:2,item:IT.DIAMOND,itemCount:5}},
+    {id:'fish_caught', name:'Angler', desc:'Catch 3 fish', type:'gather', target:'fish', count:3, reward:{xp:40,item:IT.BREAD,itemCount:3}}
+  ];
+  activeQuests = [];
+  for (var i = 0; i < 3 && i < quests.length; i++) {
+    activeQuests.push({quest: quests[i], progress: 0, completed: false});
+  }
+}
+function updateQuestProgress(type, target, amount) {
+  for (var i = 0; i < activeQuests.length; i++) {
+    var aq = activeQuests[i];
+    if (aq.completed) continue;
+    if (aq.quest.type === type) {
+      if (type === 'kill' && aq.quest.target === target) { aq.progress += amount; if (aq.progress >= aq.quest.count) completeQuest(i); }
+      else if (type === 'gather' && target === aq.quest.target) { aq.progress += amount; if (aq.progress >= aq.quest.count) completeQuest(i); }
+      else if (type === 'explore' && target === aq.quest.target) { aq.progress = 1; completeQuest(i); }
+    }
+  }
+}
+function completeQuest(idx) {
+  var aq = activeQuests[idx];
+  if (aq.completed) return;
+  aq.completed = true;
+  showMsg('Quest complete: ' + aq.quest.name + '!');
+  stats.questsCompleted++;
+  if (aq.quest.reward.xp) addXP(aq.quest.reward.xp);
+  if (aq.quest.reward.item) addItem(aq.quest.reward.item, aq.quest.reward.itemCount || 1);
+  if (aq.quest.reward.skillPoints) skillPoints += aq.quest.reward.skillPoints;
+  for (var i = 0; i < quests.length; i++) {
+    var q = quests[i];
+    var already = false;
+    for (var j = 0; j < activeQuests.length; j++) { if (activeQuests[j].quest.id === q.id) already = true; }
+    if (!already) { activeQuests.push({quest: q, progress: 0, completed: false}); break; }
+  }
+}
+function openQuests() { gameState = 'quests'; document.getElementById('quest-screen').style.display = 'flex'; renderQuests(); }
+function closeQuests() { gameState = 'playing'; document.getElementById('quest-screen').style.display = 'none'; }
+function renderQuests() {
+  var ql = document.getElementById('quest-list'); if (!ql) return; ql.innerHTML = '';
+  for (var i = 0; i < activeQuests.length; i++) {
+    var aq = activeQuests[i];
+    var div = document.createElement('div'); div.className = 'quest-row';
+    var progress = aq.completed ? 'DONE' : aq.progress + '/' + aq.quest.count;
+    div.innerHTML = '<span class="q-name">' + aq.quest.name + (aq.completed ? ' &#10003;' : '') + '</span><span class="q-desc">' + aq.quest.desc + '</span><span class="q-progress">' + progress + '</span>';
+    ql.appendChild(div);
+  }
+}
+function openStats() { gameState = 'stats'; document.getElementById('stats-screen').style.display = 'flex'; renderStats(); }
+function closeStats() { gameState = 'playing'; document.getElementById('stats-screen').style.display = 'none'; }
+function renderStats() {
+  var sl = document.getElementById('stats-list'); if (!sl) return; sl.innerHTML = '';
+  var s = [
+    ['Enemies Killed', stats.kills], ['Blocks Mined', stats.blocksMined], ['Fish Caught', stats.fishCaught],
+    ['Bosses Killed', stats.bossesKilled], ['Quests Done', stats.questsCompleted],
+    ['Time Played', Math.floor(gameTime / 60) + 'm'], ['Player Level', playerLevel], ['XP', xp + '/' + xpToNext]
+  ];
+  for (var i = 0; i < s.length; i++) {
+    var row = document.createElement('div'); row.className = 'stat-row';
+    row.innerHTML = '<span class="stat-name">' + s[i][0] + '</span><span class="stat-val">' + s[i][1] + '</span>';
+    sl.appendChild(row);
+  }
+}
+function renderMinimap() {
+  var held = getHeldItem();
+  if (held.id !== IT.MAP) { document.getElementById('minimap').style.display = 'none'; return; }
+  document.getElementById('minimap').style.display = 'block';
+  if (!minimapCanvas) { minimapCanvas = document.getElementById('minimap'); minimapCtx = minimapCanvas.getContext('2d'); }
+  var mc = minimapCtx;
+  mc.fillStyle = '#111'; mc.fillRect(0, 0, 40, 40);
+  var scale = 40 / WORLD_W;
+  for (var x = 0; x < WORLD_W; x += 2) {
+    for (var y = 0; y < WORLD_H; y += 2) {
+      var b = world[x][y];
+      if (b !== BLK.AIR && b !== BLK.WATER) { mc.fillStyle = BCOLORS[b] || '#555'; mc.fillRect(x * scale, y * scale, 2, 2); }
+      else if (b === BLK.WATER) { mc.fillStyle = '#3070c0'; mc.fillRect(x * scale, y * scale, 2, 2); }
+    }
+  }
+  for (var i = 0; i < entities.length; i++) { var e = entities[i]; mc.fillStyle = e.type === ENT.BOSS ? '#f0f' : '#f00'; mc.fillRect((e.x / TILE) * scale, (e.y / TILE) * scale, 2, 2); }
+  for (var i = 0; i < npcs.length; i++) { var n = npcs[i]; mc.fillStyle = '#0ff'; mc.fillRect((n.x / TILE) scale, (n.y / TILE) scale, 2, 2); }
+  mc.fillStyle = '#0f0';
+  mc.fillRect((player.x / TILE) * scale, (player.y / TILE) scale, 3, 3);
+}
 function renderBossHealth(){
 if(!bossActive)return;
 for(var i=0;i<entities.length;i++){var e=entities[i];
