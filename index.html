@@ -575,6 +575,7 @@ var pbx1=Math.floor(player.x/TILE),pbx2=Math.floor((player.x+player.w)/TILE);
 var pby1=Math.floor(player.y/TILE),pby2=Math.floor((player.y+player.h)/TILE);
 if(x>=pbx1&&x<=pbx2&&y>=pby1&&y<=pby2)return;
 world[x][y]=id;removeItem(id,1);playSound('place');r1Vibrate(20);
+}
 
 function eatFood(id){
 var hr=0,hg=0;
@@ -590,7 +591,7 @@ function useMedkit(){player.hp=player.maxHp;removeItem(IT.MEDKIT,1);showMsg('Med
 
 function showMsg(msg){
 var t=document.getElementById('r1-toast');if(t){t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2000);}}
-function addXP(a){xp+=a;}
+function addXP(a){xp+=a;while(xp>=xpToNext){xp-=xpToNext;playerLevel++;skillPoints++;xpToNext=Math.floor(xpToNext*1.5);showMsg('Level Up! Lv'+playerLevel);}}
 function killPlayer(cause){gameState='dead';document.getElementById('death-msg').textContent='Killed by '+cause;document.getElementById('death-screen').style.display='flex';}
 function respawnPlayer(){player.hp=player.maxHp;player.hunger=player.maxHunger;player.stamina=player.maxStamina;player.x=WORLD_W/2*TILE;for(var y=0;y<WORLD_H;y++){var bx=Math.floor(player.x/TILE);if(world[bx]&&world[bx][y]!==BLK.AIR&&world[bx][y]!==BLK.WATER){player.y=(y-3)*TILE;break;}}entities=[];spawnEntities();document.getElementById('death-screen').style.display='none';gameState='playing';lastTime=performance.now();}
 
