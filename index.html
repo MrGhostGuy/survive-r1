@@ -935,9 +935,9 @@ function renderMinimap() {
     }
   }
   for (var i = 0; i < entities.length; i++) { var e = entities[i]; mc.fillStyle = e.type === ENT.BOSS ? '#f0f' : '#f00'; mc.fillRect((e.x / TILE) * scale, (e.y / TILE) * scale, 2, 2); }
-  for (var i = 0; i < npcs.length; i++) { var n = npcs[i]; mc.fillStyle = '#0ff'; mc.fillRect((n.x / TILE) scale, (n.y / TILE) scale, 2, 2); }
+  for (var i = 0; i < npcs.length; i++) { var n = npcs[i]; mc.fillStyle = '#0ff'; mc.fillRect((n.x / TILE) * scale, (n.y / TILE) * scale, 2, 2); }
   mc.fillStyle = '#0f0';
-  mc.fillRect((player.x / TILE) * scale, (player.y / TILE) scale, 3, 3);
+  mc.fillRect((player.x / TILE) * scale, (player.y / TILE) * scale, 3, 3);
 }
 function renderBossHealth(){
 if(!bossActive)return;
